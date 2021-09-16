@@ -2,6 +2,8 @@ import List from "./List"
 import { useState, useCallback } from "react";
 import {useSelector, useDispatch } from 'react-redux'
 import { addListItem, deleteListItem } from "../../store/listReducer";
+import { createContext } from "react";
+export const  mainContext =  createContext()
 const getUniqueId = ()=> {
     return String(Math.floor(Math.random()*200))
 }
@@ -24,8 +26,10 @@ export default function Content() {
 
   },[dispatch, addListItem, setShowInput])
   return (
+    <mainContext.Provider value ={{handleDalete, saveNewItem, showInput, handleCreate}}>
     <div>
-      <List list={list}  handleCreate={handleCreate} showInput={showInput}  saveNewItem= {saveNewItem} handleDalete={handleDalete}/>
+      <List list={list}    />
     </div>
+    </mainContext.Provider>
   );
 }

@@ -9,7 +9,7 @@ import { setSelected } from "../../store/listReducer";
 import DeleteSharpIcon from "@material-ui/icons/DeleteSharp";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
-import Header from "../Header/Header";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "70%",
@@ -31,12 +31,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ToDoList({
+export default function EditItem({
   list,
- 
+  handleCreate,
+  showInput,
   saveNewItem,
-
+  handleDalete,
 }) {
+    const [showTextarea, setShowTextarea] = React.useState()
   const dispatch = useDispatch();
   const classes = useStyles();
   const formik = useFormik({
@@ -44,15 +46,15 @@ export default function ToDoList({
       text: "",
     },
     onSubmit: (values) => {
-      saveNewItem(values.text);
+    //   saveNewText(values.text);
     },
   });
 
 
   const {selected} = useSelector(state=>state.list)
 
-  const handleChange = React.useCallback(
-    (id) => {
+  const handleClick = React.useCallback(
+    (e) => {
       dispatch(setSelected(id));
      
     },
@@ -61,43 +63,14 @@ export default function ToDoList({
 
 
   return (
-    <List className={classes.root}>
-      <Header classes= {classes}/>
-   
-      {list.map((value) => {
-        const labelId = `checkbox-list-label-${value.id}`;
-
-        return (
-          <ListItem
-            key={value.id}
-            role={undefined}
-            dense
-            button
-            className={classes.item}
-          >
-            <ListItemIcon>
-              <Checkbox
-                edge="start"
-                tabIndex={-1}
-                disableRipple
-                inputProps={{ "aria-labelledby": labelId }}
-                onChange={() => {
-                  handleChange(value.id);
-                }}
-              />
-            </ListItemIcon>
+   <>
+      <form onSubmit = {formik.handleSubmit}></form>
+          <textarea/>
+      
+    
 
             <ListItemIcon> <span onClick={()=>{}}>edite</span> </ListItemIcon>
-            <ListItemIcon> {value.date} </ListItemIcon>
-
-            <ListItemText
-              id={labelId}
-              primary={value.content}
-              className={classes.content}
-            />
-          </ListItem>
-        );
-      })}
-    </List>
+           
+</>
   );
 }
