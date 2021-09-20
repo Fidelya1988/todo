@@ -9,7 +9,8 @@ import { setSelected } from "../../store/listReducer";
 import DeleteSharpIcon from "@material-ui/icons/DeleteSharp";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
-
+import { changeListItem } from "../../../store/listReducer";
+import EditItemForm from '../Form/Form'
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "70%",
@@ -41,14 +42,15 @@ export default function EditItem({
     const [showTextarea, setShowTextarea] = React.useState()
   const dispatch = useDispatch();
   const classes = useStyles();
-  const formik = useFormik({
-    initialValues: {
-      text: "",
-    },
-    onSubmit: (values) => {
-    //   saveNewText(values.text);
-    },
-  });
+  // const formik = useFormik({
+  //   initialValues: {
+
+  //     content: "",
+  //   },
+  //   onSubmit: (values) => {
+  //   dispatch(changeListItem({content: values.content, id: } ))
+  //   },
+  // });
 
 
   const {selected} = useSelector(state=>state.list)
@@ -63,14 +65,12 @@ export default function EditItem({
 
 
   return (
-   <>
-      <form onSubmit = {formik.handleSubmit}></form>
-          <textarea/>
-      
+   <div>
+    
     
 
-            <ListItemIcon> <span onClick={()=>{}}>edite</span> </ListItemIcon>
+            <ListItemIcon> <span onClick={(e)=>{console.log(e.target.id)}}>edite</span> <input/></ListItemIcon>
            
-</>
+ </div>
   );
 }
