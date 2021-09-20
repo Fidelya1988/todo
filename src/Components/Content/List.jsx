@@ -8,9 +8,10 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { setSelected } from "../../store/listReducer";
 // import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 import { useDispatch, useSelector } from "react-redux";
-import { useFormik } from "formik";
+import EditItem from "./EditItem/EditItem";
 import { filterElementsArray } from "../../helpers/filterElements";
 import Header from "../Header/Header";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "70%",
@@ -35,8 +36,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ToDoList({ list }) {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const {matching} = useSelector(state=> state.search)
-
+  const { matching } = useSelector((state) => state.search);
 
   const handleChange = React.useCallback(
     (id) => {
@@ -71,11 +71,8 @@ export default function ToDoList({ list }) {
                 }}
               />
             </ListItemIcon>
+            <EditItem id={value.id} />
 
-            <ListItemIcon>
-              {" "}
-              <span onClick={() => {}}>edit</span>{" "}
-            </ListItemIcon>
             <ListItemIcon> {value.date} </ListItemIcon>
 
             <ListItemText

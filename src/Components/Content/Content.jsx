@@ -3,11 +3,12 @@ import { useState, useCallback } from "react";
 import {useSelector, useDispatch } from 'react-redux'
 import { addListItem, deleteListItem } from "../../store/listReducer";
 import { createContext } from "react";
+import { utc } from "../../helpers/utc";
 export const  mainContext =  createContext()
 const getUniqueId = ()=> {
     return String(Math.floor(Math.random()*200))
 }
-var utc = new Date().toJSON().slice(0,10).replace(/-/g,'.');
+
 export default function Content() {
 
   const {list} = useSelector(state=> state.list)
@@ -26,7 +27,7 @@ export default function Content() {
 
   },[dispatch, addListItem, setShowInput])
   return (
-    <mainContext.Provider value ={{handleDalete, saveNewItem, showInput, handleCreate}}>
+    <mainContext.Provider value ={{handleDalete, saveNewItem, showInput, handleCreate, setShowInput}}>
     <div>
       <List list={list}    />
     </div>

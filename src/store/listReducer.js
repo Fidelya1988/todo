@@ -47,10 +47,13 @@ const listSlice = createSlice({
     },
 
     changeListItem(state, action) {
-      state.list.forEach(
-        (el) =>
-          el.id === action.payload.id && el.content === action.payload.content
+      console.log(action.payload);
+      const changedList = state.list.map((el) =>
+        el.id === action.payload.id
+          ? { ...el, date: action.payload.utc, content: action.payload.content }
+          : el
       );
+      state.list = changedList;
     },
   },
 });
