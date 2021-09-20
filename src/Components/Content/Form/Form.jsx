@@ -1,39 +1,40 @@
 import React from "react";
 import { useFormik } from "formik";
-import { Button } from "@material-ui/core";
-export default function Form({ handleSubmit }) {
+
+import Input from "./Input/Input";
+import styles from './form.module.css'
+import { useSelector } from "react-redux";
+import { getContent } from "../../../helpers/getContent";
+export default function Form({ handleSubmit, id }) {
+    const {list}= useSelector(state=>state.list)
+//  console.log(list)
+//  console.log(getContent(id,list))
   const formik = useFormik({
     initialValues: {
-      text: "",
+      text: getContent(id,list),
     },
     onSubmit: (values) => {
-      
-      handleSubmit(values.text);
+     const prevValue =  getContent(id,list)
+      handleSubmit(values.text, prevValue) ;
     },
   });
 
   return (
     <form
       onSubmit={formik.handleSubmit}
-      style={{ width: "100%", display: "flex" }}
+     className ={styles.form}
     >
-      <input
-        id="text"
-        name="text"
-        onChange={formik.handleChange}
-        style={{ width: "95%", position: "relative", height: "5rem" }}
-        autoFocus
-      />
-
-      <Button
+        <Input handleChange={formik.handleChange} submit={formik.handleSubmit} id={id} value={formik.values.text}/>
+   
+      {/* <Button
         variant="contained"
-        href="#contained-buttons"
+        // href="#contained-buttons"
         onClick={() => formik.handleSubmit()}
-        color="success"
+        color="secondary"
         // style={{marginRight:'auto', marginLeft:'auto'}}
       >
         Save
-      </Button>
+      </Button>  */}
     </form>
   );
 }

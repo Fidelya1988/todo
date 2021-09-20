@@ -4,6 +4,7 @@ import {useSelector, useDispatch } from 'react-redux'
 import { addListItem, deleteListItem } from "../../store/listReducer";
 import { createContext } from "react";
 import { utc } from "../../helpers/utc";
+
 export const  mainContext =  createContext()
 const getUniqueId = ()=> {
     return String(Math.floor(Math.random()*200))
@@ -27,7 +28,7 @@ export default function Content() {
 
   },[dispatch, addListItem, setShowInput])
   return (
-    <mainContext.Provider value ={{handleDalete, saveNewItem, showInput, handleCreate, setShowInput}}>
+    <mainContext.Provider value ={{handleDalete, saveNewItem, showInput, handleCreate}}>
     <div>
       <List list={list}    />
     </div>
