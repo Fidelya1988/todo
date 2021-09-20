@@ -9,6 +9,7 @@ import { setSelected } from "../../store/listReducer";
 // import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
+import { filterElementsArray } from "../../helpers/filterElements";
 import Header from "../Header/Header";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
 export default function ToDoList({ list }) {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const {matching} = useSelector(state=> state.search)
 
-  // const {selected} = useSelector(state=>state.list)
 
   const handleChange = React.useCallback(
     (id) => {
@@ -48,7 +49,7 @@ export default function ToDoList({ list }) {
     <List className={classes.root}>
       <Header classes={classes} />
 
-      {list.map((value) => {
+      {filterElementsArray(list, matching).map((value) => {
         const labelId = `checkbox-list-label-${value.id}`;
 
         return (
