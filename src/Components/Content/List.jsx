@@ -6,7 +6,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 import { setSelected } from "../../store/listReducer";
-import DeleteSharpIcon from "@material-ui/icons/DeleteSharp";
+// import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import Header from "../Header/Header";
@@ -31,39 +31,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ToDoList({
-  list,
- 
-  saveNewItem,
-
-}) {
+export default function ToDoList({ list }) {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const formik = useFormik({
-    initialValues: {
-      text: "",
-    },
-    onSubmit: (values) => {
-      saveNewItem(values.text);
-    },
-  });
 
-
-  const {selected} = useSelector(state=>state.list)
+  // const {selected} = useSelector(state=>state.list)
 
   const handleChange = React.useCallback(
     (id) => {
       dispatch(setSelected(id));
-     
     },
     [dispatch, setSelected]
   );
 
-
   return (
     <List className={classes.root}>
-      <Header classes= {classes}/>
-   
+      <Header classes={classes} />
+
       {list.map((value) => {
         const labelId = `checkbox-list-label-${value.id}`;
 
@@ -87,7 +71,10 @@ export default function ToDoList({
               />
             </ListItemIcon>
 
-            <ListItemIcon> <span onClick={()=>{}}>edite</span> </ListItemIcon>
+            <ListItemIcon>
+              {" "}
+              <span onClick={() => {}}>edit</span>{" "}
+            </ListItemIcon>
             <ListItemIcon> {value.date} </ListItemIcon>
 
             <ListItemText

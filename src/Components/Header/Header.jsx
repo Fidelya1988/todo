@@ -1,34 +1,12 @@
 import React, { useContext } from "react";
-// import { makeStyles } from "@material-ui/core/styles";
-
+import Search from "./Search/Search";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { mainContext } from "../Content/Content";
 import DeleteSharpIcon from "@material-ui/icons/DeleteSharp";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
-
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     width: "70%",
-
-//     backgroundColor: theme.palette.background.paper,
-//   },
-
-//   item: {
-//     borderBottom: "1px solid gray",
-//   },
-//   header: {
-//     display: "flex",
-//     justifyContent: "space-between",
-//     background: "black",
-//     color: "White",
-//   },
-//   content: {
-//     padding: "0.6rem",
-//   },
-// }));
-
+import { Button } from "@material-ui/core";
 export default function Header({ classes }) {
   const { handleDalete, saveNewItem, showInput, handleCreate } =
     useContext(mainContext);
@@ -56,24 +34,35 @@ export default function Header({ classes }) {
             />
           )}
         </ListItemIcon>{" "}
+       
         <ListItemIcon>
-          <input></input>
-        </ListItemIcon>{" "}
+        <Search/>
+        </ListItemIcon>
         <ListItemIcon style={{ color: "White" }} onClick={handleCreate}>
           {" "}
           +
         </ListItemIcon>
       </ListItem>
       {showInput && (
-        <form onSubmit={formik.handleSubmit}>
-          <textarea
+        <form onSubmit={formik.handleSubmit} style={{ width: "100%", display: 'flex'}}>
+          <input
             id="text"
             name="text"
             onChange={formik.handleChange}
-            // value={formik.values.text}
+            style={{ width: "95%",  position: 'relative', height: '5rem'}}
+            autoFocus
           />
-
-          <button type="Submit">Save</button>
+         
+         
+          <Button
+            variant="contained"
+            href="#contained-buttons"
+            onClick={() => formik.handleSubmit()}
+            color="success"
+            // style={{marginRight:'auto', marginLeft:'auto'}}
+          >
+            Save
+          </Button>
         </form>
       )}
     </>

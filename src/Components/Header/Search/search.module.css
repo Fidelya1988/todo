@@ -1,0 +1,10 @@
+
+.input{
+    background: white url('../../Icons/search.svg') no-repeat center right ;
+    background-position: 95% ;
+    background-size: 0.7rem;
+    width: 12rem;
+    height: 1.2rem;
+    font-size: 0.8rem;
+   
+}
