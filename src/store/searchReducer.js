@@ -13,11 +13,8 @@ const searchSlice = createSlice({
           ? action.payload.toLowerCase()
           : action.payload;
     },
-    
   },
 });
 export const { setMatching } = searchSlice.actions;
-
-
 
 export default searchSlice.reducer;

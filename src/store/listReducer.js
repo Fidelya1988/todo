@@ -7,7 +7,7 @@ const listSlice = createSlice({
     list: [
       {
         date: "16.09.2021",
-        content: "Food",
+        content: "Hello",
         id: "1",
         completed: false
       },
@@ -21,7 +21,7 @@ const listSlice = createSlice({
       {
         date: "17.09.2021",
         content:
-          "Порада. Шукати результати лише українською мовою. Мову пошуку можна вибрати на сторінці Налаштування",
+          "To clean the room",
         id: "3",
         completed: false
       },

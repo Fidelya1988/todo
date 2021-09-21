@@ -7,18 +7,20 @@ import { useSelector, useDispatch } from "react-redux";
 import { getContent } from "../../../helpers/getContent";
 import { utc } from "../../../helpers/utc";
 import { mainContext } from "../Content";
+
 export default function Form({ id }) {
   const { list } = useSelector((state) => state.list);
   const dispatch = useDispatch();
+
   const { setCurrentId } = useContext(mainContext);
+
   const handleSubmit = useCallback(
     (value, prevValue) => {
       if (value !== prevValue)
         dispatch(changeListItem({ utc, id, content: value }));
-
       setCurrentId(null);
     },
-    [ id, dispatch, setCurrentId]
+    [id, dispatch, setCurrentId]
   );
 
   const formik = useFormik({
@@ -39,8 +41,6 @@ export default function Form({ id }) {
         id={id}
         value={formik.values.text}
       />
-
-      
     </form>
   );
 }
