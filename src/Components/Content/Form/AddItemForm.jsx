@@ -15,7 +15,7 @@ export default function AddItemForm() {
 } = useContext(mainContext);
   const hanldeClose = useCallback(() => {
     setShowInput(false);
-  }, []);
+  }, [setShowInput]);
 
   const formik = useFormik({
     initialValues: {

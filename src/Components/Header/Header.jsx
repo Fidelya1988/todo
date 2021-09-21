@@ -1,10 +1,10 @@
-import { useCallback, useContext } from "react";
+import { useCallback} from "react";
 import Search from "./Search/Search";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 
 import DeleteSharpIcon from "@material-ui/icons/DeleteSharp";
-import { deleteListItem, setSelected, setCompleted } from "../../store/listReducer";
+import { deleteListItem, setSelected } from "../../store/listReducer";
 import { useDispatch, useSelector } from "react-redux";
 import CreateNewItemButton from "./CreateNewItemButton/CreateNewItemButton";
 
@@ -14,7 +14,7 @@ export default function Header({ classes }) {
   const handleDelete = useCallback(() => {
     dispatch(deleteListItem());
     dispatch(setSelected(null));
-  }, [dispatch, deleteListItem, setSelected]);
+  }, [dispatch]);
   return (
     <>
       <ListItem className={classes.header}>

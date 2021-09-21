@@ -6,7 +6,7 @@ export default function CreateNewItemButton() {
   const { setShowInput, showInput } = useContext(mainContext);
    const toggleShowInput = useCallback(()=> {
     !showInput&& setShowInput(true)
-   },[showInput])
+   },[showInput, setShowInput])
   return (
     <ListItemIcon  >
       <span onClick={toggleShowInput} style={{ color: "White", fontSize: '1rem' }}>{!showInput? <AddIcon />: null}</span>

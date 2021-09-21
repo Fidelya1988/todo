@@ -18,7 +18,7 @@ export default function Form({ id }) {
 
       setCurrentId(null);
     },
-    [changeListItem, id]
+    [ id, dispatch, setCurrentId]
   );
 
   const formik = useFormik({
@@ -40,15 +40,7 @@ export default function Form({ id }) {
         value={formik.values.text}
       />
 
-      {/* <Button
-        variant="contained"
-        // href="#contained-buttons"
-        onClick={() => formik.handleSubmit()}
-        color="secondary"
-        // style={{marginRight:'auto', marginLeft:'auto'}}
-      >
-        Save
-      </Button>  */}
+      
     </form>
   );
 }

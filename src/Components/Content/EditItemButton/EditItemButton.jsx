@@ -1,7 +1,7 @@
 import { useContext, useCallback } from "react";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import EditIcon from "@mui/icons-material/Edit";
-import { changeListItem } from "../../../store/listReducer";
+
 
 import { mainContext } from "../Content";
 export default function EditItemButton({ id }) {
@@ -10,7 +10,7 @@ export default function EditItemButton({ id }) {
   const handleClick = useCallback(() => {
     setShowInput(false);
     setCurrentId(id);
-  }, [changeListItem, setShowInput]);
+  }, [setShowInput,id, setCurrentId]);
 
   return (
     <div>

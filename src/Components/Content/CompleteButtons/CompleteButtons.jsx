@@ -12,7 +12,7 @@ export default function CompleteButtons({ completed, id }) {
   useEffect(() => {
     taskState && dispatch(setCompleted({id, date:utc}));
     setTaskState(false);
-  }, [taskState, dispatch]);
+  }, [taskState, dispatch,id]);
   return (
     <ListItemIcon onClick={() => setTaskState(true)}>
       {completed ? (

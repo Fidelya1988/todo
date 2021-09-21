@@ -20,19 +20,18 @@ import CompleteButtons from "./CompleteButtons/CompleteButtons";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "70%",
-  marginLeft: "auto",
-  marginRight: 'auto',
+    marginLeft: "auto",
+    marginRight: "auto",
     backgroundColor: theme.palette.background.paper,
- 
-    borderBottom: 'none',
-    marginTop:'0',
-    paddingTop: '0',
-  
+
+    borderBottom: "none",
+    marginTop: "0",
+    paddingTop: "0",
   },
 
   item: {
     borderBottom: "1px solid gray",
-    marginTop: '0'
+    marginTop: "0",
   },
   header: {
     display: "flex",
@@ -54,7 +53,7 @@ export default function ToDoList({ list }) {
     (id) => {
       dispatch(setSelected(id));
     },
-    [dispatch, setSelected]
+    [dispatch]
   );
 
   return (
