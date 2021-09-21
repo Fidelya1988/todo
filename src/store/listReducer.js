@@ -7,21 +7,21 @@ const listSlice = createSlice({
     list: [
       {
         date: "16.09.2021",
-        content: "Hello",
+        content: "Call 0962783838 and order books",
         id: "1",
-        completed: false
+        completed: true
       },
       {
         date: "17.09.2021",
         content:
-          "Порада. Шукати результати лише українською мовою. Мову пошуку можна вибрати на сторінці Налаштування",
+          "buy food",
         id: "2",
         completed: false
       },
       {
         date: "17.09.2021",
         content:
-          "To clean the room",
+          "Сlean the room",
         id: "3",
         completed: false
       },
