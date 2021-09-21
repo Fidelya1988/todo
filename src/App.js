@@ -5,7 +5,7 @@ import store from "./store/index";
 function App() {
   return (
     <Provider store={store}>
-      <div className="App">
+      <div className="App" style= {{height: "100wh"}}>
         <Content />
       </div>
     </Provider>

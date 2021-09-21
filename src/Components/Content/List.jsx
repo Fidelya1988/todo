@@ -1,4 +1,5 @@
 import React from "react";
+// import { useStyles } from "./style/style";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -15,16 +16,23 @@ import { mainContext } from "./Content";
 import { useContext } from "react";
 import AddItemForm from "./Form/AddItemForm";
 import CompleteButtons from "./CompleteButtons/CompleteButtons";
-import { formatText } from "../../helpers/formatText";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "70%",
-
+  marginLeft: "auto",
+  marginRight: 'auto',
     backgroundColor: theme.palette.background.paper,
+ 
+    borderBottom: 'none',
+    marginTop:'0',
+    paddingTop: '0',
+  
   },
 
   item: {
     borderBottom: "1px solid gray",
+    marginTop: '0'
   },
   header: {
     display: "flex",
@@ -96,9 +104,10 @@ export default function ToDoList({ list }) {
 
                   <ListItemText
                     id={labelId}
-                    primary={formatText(value.content)}
+                    primary={value.content}
                     className={classes.content}
                   />
+
                   <ListItemIcon> {value.date} </ListItemIcon>
                 </>
               )}

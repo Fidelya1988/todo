@@ -13,7 +13,7 @@ export default function Input({ handleChange, submit, value}) {
         onChange={handleChange}
         onBlur={submit}
         autoFocus
-       
+        maxLength="100"
         value = {value}
       ></textarea>
 
