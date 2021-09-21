@@ -4,12 +4,13 @@ import { useDispatch } from "react-redux";
 import { setCompleted } from "../../../store/listReducer";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import { useEffect, useState } from "react";
+import { utc } from "../../../helpers/utc";
 export default function CompleteButtons({ completed, id }) {
-  console.log(completed);
+
   const dispatch = useDispatch();
   const [taskState, setTaskState] = useState(false);
   useEffect(() => {
-    taskState && dispatch(setCompleted(id));
+    taskState && dispatch(setCompleted({id, date:utc}));
     setTaskState(false);
   }, [taskState, dispatch]);
   return (

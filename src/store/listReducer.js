@@ -29,7 +29,7 @@ const listSlice = createSlice({
   },
   reducers: {
     addListItem(state, action) {
-      state.list.push(action.payload);
+      state.list.push({...action.payload, completed: false});
     },
     setSelected(state, action) {
       const canceledIndex = state.selected.indexOf(action.payload);
@@ -43,12 +43,16 @@ const listSlice = createSlice({
     setCompleted(state, action) {
       
       const newList = current(state).list.map(item=>{
-        const id = action.payload
+        const id = action.payload.id
         const  complete = ()=> item.completed? false: true
-        return item.id ===id? {...item, completed: complete()}: item
+        return item.id ===id? {...item, completed: complete(), date: action.payload.date}: item
       })
 
-      console.log(newList)
+      newList.sort(function(a,b){
+        if(a.completed < b.completed) return 1
+        if(a.completed > b.completed) return -1
+        return 0
+      })
   
       state.list = newList;
     },
