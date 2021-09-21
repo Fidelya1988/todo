@@ -6,12 +6,12 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 import { setSelected } from "../../store/listReducer";
-// import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
+
 import { useDispatch, useSelector } from "react-redux";
 import EditItemButton from "./EditItemButton/EditItemButton";
 import { filterElementsArray } from "../../helpers/filterElements";
 import Header from "../Header/Header";
-import ChangeItemForm from './Form/Form'
+import ChangeItemForm from "./Form/Form";
 import { mainContext } from "./Content";
 import { useContext } from "react";
 import AddItemForm from "./Form/AddItemForm";
@@ -75,7 +75,7 @@ export default function ToDoList({ list }) {
               className={classes.item}
             >
               {currentId === value.id ? (
-                <ChangeItemForm  id={value.id}/>
+                <ChangeItemForm id={value.id} />
               ) : (
                 <>
                   <ListItemIcon>

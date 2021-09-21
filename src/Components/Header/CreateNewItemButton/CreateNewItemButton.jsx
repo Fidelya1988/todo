@@ -1,11 +1,14 @@
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import { useContext } from "react";
+import { useContext, useCallback } from "react";
 import { mainContext } from "../../Content/Content";
 export default function CreateNewItemButton() {
-  const { setShowInput } = useContext(mainContext);
+  const { setShowInput, showInput } = useContext(mainContext);
+   const toggleShowInput = useCallback(()=> {
+    !showInput&& setShowInput(true)
+   },[showInput])
   return (
-    <ListItemIcon style={{ color: "White" }} onClick={() => setShowInput(true)}>
-      +
+    <ListItemIcon style={{ color: "White" }} >
+      <span onClick={toggleShowInput}>{!showInput? '+': null}</span>
     </ListItemIcon>
   );
 }
