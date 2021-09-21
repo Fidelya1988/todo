@@ -11,7 +11,8 @@ import { Button } from "@material-ui/core";
 
 export default function AddItemForm() {
   const dispatch = useDispatch();
-  const { setShowInput } = useContext(mainContext);
+  const { setShowInput
+} = useContext(mainContext);
   const hanldeClose = useCallback(() => {
     setShowInput(false);
   }, []);
@@ -25,39 +26,37 @@ export default function AddItemForm() {
         addListItem({ id: getUniqueId(), content: values.text, date: utc })
       );
       setShowInput(false);
-      console.log("item");
+    
     },
-   
   });
 
   return (
-      <>
-    <form onSubmit={formik.handleSubmit} className={styles.form}>
-      <Input handleChange={formik.handleChange} />
+    <>
+      <form onSubmit={formik.handleSubmit} className={styles.form}>
+        <Input handleChange={formik.handleChange} />
 
-      <Button
-        variant="contained"
-        type="submit"
-        // href="#contained-buttons"
-        // onSubmit={() => formik.handleSubmit()}
-        color="secondary"
-        // style={{marginRight:'auto', marginLeft:'auto'}}
-      >
-        Save
-      </Button>
-      <Button
-        variant="contained"
-        type="click"
-        // href="#contained-buttons"
-        onClick={hanldeClose}
-        style= {{color: 'white', background: 'black', marginLeft: '0.4rem'}}
-        // style={{marginRight:'auto', marginLeft:'auto'}}
-      >
-        Cancel
-      </Button>
-     
-    </form>
-    
+        <Button
+          variant="contained"
+          type="submit"
+          color="secondary"
+          style={{ height: "2rem" }}
+        >
+          Save
+        </Button>
+        <Button
+          variant="contained"
+          type="click"
+          onClick={hanldeClose}
+          style={{
+            color: "white",
+            background: "black",
+            marginLeft: "0.4rem",
+            height: "2rem",
+          }}
+        >
+          Cancel
+        </Button>
+      </form>
     </>
   );
 }

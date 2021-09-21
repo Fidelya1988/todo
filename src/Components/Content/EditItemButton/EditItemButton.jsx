@@ -1,32 +1,21 @@
-import React,{useContext} from "react";
+import { useContext, useCallback } from "react";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import { useDispatch,  } from "react-redux";
+import EditIcon from "@mui/icons-material/Edit";
 import { changeListItem } from "../../../store/listReducer";
-import EditItemForm from "../Form/Form";
-import { utc } from "../../../helpers/utc";
-import { Button } from "@material-ui/core";
+
 import { mainContext } from "../Content";
 export default function EditItemButton({ id }) {
+  const { setCurrentId, setShowInput } = useContext(mainContext);
 
- const {setCurrentId }= useContext(mainContext);
-  const dispatch = useDispatch();
-
-;
-  const handleSubmit = React.useCallback(
-    (content, value) => {
-      if(content !== value) dispatch(changeListItem({ utc, id, content }));
-      
-      setCurrentId(null);
-     
-    },
-    [changeListItem, id]
-  );
+  const handleClick = useCallback(() => {
+    setShowInput(false);
+    setCurrentId(id);
+  }, [changeListItem, setShowInput]);
 
   return (
     <div>
       <ListItemIcon>
-        <Button onClick={()=> setCurrentId(id)}  color="secondary"> edite</Button>
-        {/* {currentId === id && <EditItemForm handleSubmit={handleSubmit} id={id}/>} */}
+        <EditIcon onClick={handleClick} />
       </ListItemIcon>
     </div>
   );

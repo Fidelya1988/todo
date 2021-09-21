@@ -1,31 +1,28 @@
-import React, { useContext } from "react";
+import { useCallback, useContext } from "react";
 import Search from "./Search/Search";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import { mainContext } from "../Content/Content";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DeleteSharpIcon from "@material-ui/icons/DeleteSharp";
+import { deleteListItem, setSelected, setCompleted } from "../../store/listReducer";
 import { useDispatch, useSelector } from "react-redux";
-import { useFormik } from "formik";
-import { Button } from "@material-ui/core";
-import CreateItemForm from "../Content/Form/Form";
 import CreateNewItemButton from "./CreateNewItemButton/CreateNewItemButton";
 export default function Header({ classes }) {
-  const { handleDalete, saveNewItem, showInput, handleCreate } =
-    useContext(mainContext);
-
+  const dispatch = useDispatch();
   const { selected } = useSelector((state) => state.list);
-
+  const handleDelete = useCallback(() => {
+    dispatch(deleteListItem());
+    dispatch(setSelected(null));
+  }, [dispatch, deleteListItem, setSelected]);
   return (
     <>
       <ListItem className={classes.header}>
         <ListItemIcon style={{ color: "White" }}>
           {selected.length > 0 && (
-            <DeleteSharpIcon
-              color={"secondary"}
-              onClick={(e) => {
-                handleDalete(e);
-              }}
-            />
+            <>
+            <DeleteSharpIcon color={"secondary"} onClick={handleDelete} />
+            <CheckCircleIcon color={"success"} onClick={()=>{dispatch(setCompleted())}}  />
+            </>
           )}
         </ListItemIcon>{" "}
         <ListItemIcon>
