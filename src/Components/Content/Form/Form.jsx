@@ -1,31 +1,45 @@
-import React from "react";
+import { useCallback, useContext } from "react";
 import { useFormik } from "formik";
-
+import { changeListItem } from "../../../store/listReducer";
 import Input from "./Input/Input";
-import styles from './form.module.css'
-import { useSelector } from "react-redux";
+import styles from "./form.module.css";
+import { useSelector, useDispatch } from "react-redux";
 import { getContent } from "../../../helpers/getContent";
-export default function Form({ handleSubmit, id }) {
-    const {list}= useSelector(state=>state.list)
-//  console.log(list)
-//  console.log(getContent(id,list))
+import { utc } from "../../../helpers/utc";
+import { mainContext } from "../Content";
+export default function Form({ id }) {
+  const { list } = useSelector((state) => state.list);
+  const dispatch = useDispatch();
+  const { setCurrentId } = useContext(mainContext);
+  const handleSubmit = useCallback(
+    (value, prevValue) => {
+      if (value !== prevValue)
+        dispatch(changeListItem({ utc, id, content: value }));
+
+      setCurrentId(null);
+    },
+    [changeListItem, id]
+  );
+
   const formik = useFormik({
     initialValues: {
-      text:id? getContent(id,list): 'type..',
+      text: getContent(id, list),
     },
     onSubmit: (values) => {
-     const prevValue =  getContent(id,list)
-      handleSubmit(values.text, prevValue) ;
+      const prevValue = getContent(id, list);
+      handleSubmit(values.text, prevValue);
     },
   });
 
   return (
-    <form
-      onSubmit={formik.handleSubmit}
-     className ={styles.form}
-    >
-        <Input handleChange={formik.handleChange} submit={formik.handleSubmit} id={id} value={formik.values.text}/>
-   
+    <form onSubmit={formik.handleSubmit} className={styles.form}>
+      <Input
+        handleChange={formik.handleChange}
+        submit={formik.handleSubmit}
+        id={id}
+        value={formik.values.text}
+      />
+
       {/* <Button
         variant="contained"
         // href="#contained-buttons"

@@ -8,10 +8,10 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { setSelected } from "../../store/listReducer";
 // import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 import { useDispatch, useSelector } from "react-redux";
-import EditItem from "./EditItem/EditItem";
+import EditItemButton from "./EditItemButton/EditItemButton";
 import { filterElementsArray } from "../../helpers/filterElements";
 import Header from "../Header/Header";
-
+import ChangeItemForm from './Form/Form'
 import { mainContext } from "./Content";
 import { useContext } from "react";
 import AddItemForm from "./Form/AddItemForm";
@@ -40,7 +40,7 @@ export default function ToDoList({ list }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const { matching } = useSelector((state) => state.search);
-  const { showInput } = useContext(mainContext);
+  const { currentId, showInput } = useContext(mainContext);
   const handleChange = React.useCallback(
     (id) => {
       dispatch(setSelected(id));
@@ -62,40 +62,48 @@ export default function ToDoList({ list }) {
           <AddItemForm />
         </ListItem>
       )}
-      {filterElementsArray(list, matching).map((value) => {
-        const labelId = `checkbox-list-label-${value.id}`;
+      {filterElementsArray(list, matching)
+        .map((value) => {
+          const labelId = `checkbox-list-label-${value.id}`;
 
-        return (
-          <ListItem
-            key={value.id}
-            role={undefined}
-            dense
-            button
-            className={classes.item}
-          >
-            <ListItemIcon>
-              <Checkbox
-                edge="start"
-                tabIndex={-1}
-                disableRipple
-                inputProps={{ "aria-labelledby": labelId }}
-                onChange={() => {
-                  handleChange(value.id);
-                }}
-              />
-            </ListItemIcon>
-            <EditItem id={value.id} />
+          return (
+            <ListItem
+              key={value.id}
+              role={undefined}
+              dense
+              button
+              className={classes.item}
+            >
+              {currentId === value.id ? (
+                <ChangeItemForm  id={value.id}/>
+              ) : (
+                <>
+                  <ListItemIcon>
+                    <Checkbox
+                      edge="start"
+                      tabIndex={-1}
+                      disableRipple
+                      inputProps={{ "aria-labelledby": labelId }}
+                      onChange={() => {
+                        handleChange(value.id);
+                      }}
+                    />
+                  </ListItemIcon>
+                  <EditItemButton id={value.id} />
 
-            <ListItemIcon> {value.date} </ListItemIcon>
+                  <ListItemIcon> {value.date} </ListItemIcon>
 
-            <ListItemText
-              id={labelId}
-              primary={value.content}
-              className={classes.content}
-            />
-          </ListItem>
-        );
-      }).reverse()}
+                  <ListItemText
+                    id={labelId}
+                    primary={value.content}
+                    className={classes.content}
+                  />
+                </>
+              )}
+            </ListItem>
+          );
+        })
+        .reverse()}
     </List>
   );
 }
