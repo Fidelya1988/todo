@@ -6,7 +6,6 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 import { setSelected } from "../../store/listReducer";
-
 import { useDispatch, useSelector } from "react-redux";
 import EditItemButton from "./EditItemButton/EditItemButton";
 import { filterElementsArray } from "../../helpers/filterElements";
@@ -16,6 +15,7 @@ import { mainContext } from "./Content";
 import { useContext } from "react";
 import AddItemForm from "./Form/AddItemForm";
 import CompleteButtons from "./CompleteButtons/CompleteButtons";
+import { formatText } from "../../helpers/formatText";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "70%",
@@ -96,7 +96,7 @@ export default function ToDoList({ list }) {
 
                   <ListItemText
                     id={labelId}
-                    primary={value.content}
+                    primary={formatText(value.content)}
                     className={classes.content}
                   />
                   <ListItemIcon> {value.date} </ListItemIcon>
