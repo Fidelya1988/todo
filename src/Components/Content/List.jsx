@@ -15,7 +15,7 @@ import ChangeItemForm from "./Form/Form";
 import { mainContext } from "./Content";
 import { useContext } from "react";
 import AddItemForm from "./Form/AddItemForm";
-
+import CompleteButtons from "./CompleteButtons/CompleteButtons";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "70%",
@@ -92,13 +92,14 @@ export default function ToDoList({ list }) {
                   </ListItemIcon>
                   <EditItemButton id={value.id} />
 
-                  <ListItemIcon> {value.date} </ListItemIcon>
+                  <CompleteButtons completed={value.completed} id={value.id} />
 
                   <ListItemText
                     id={labelId}
                     primary={value.content}
                     className={classes.content}
                   />
+                  <ListItemIcon> {value.date} </ListItemIcon>
                 </>
               )}
             </ListItem>

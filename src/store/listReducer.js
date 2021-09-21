@@ -40,15 +40,16 @@ const listSlice = createSlice({
         ? state.selected.push(action.payload)
         : state.selected.splice(canceledIndex, 1);
     },
-    setCompleted(state) {
+    setCompleted(state, action) {
       
       const newList = current(state).list.map(item=>{
-        const id = state.selected.find((el) => item.id === el);
-        return item.id ===id? {...item, completed: true}: item
+        const id = action.payload
+        const  complete = ()=> item.completed? false: true
+        return item.id ===id? {...item, completed: complete()}: item
       })
 
-    
-    console.log(newList)
+      console.log(newList)
+  
       state.list = newList;
     },
 
