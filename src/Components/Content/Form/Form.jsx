@@ -11,7 +11,7 @@ export default function Form({ handleSubmit, id }) {
 //  console.log(getContent(id,list))
   const formik = useFormik({
     initialValues: {
-      text: getContent(id,list),
+      text:id? getContent(id,list): 'type..',
     },
     onSubmit: (values) => {
      const prevValue =  getContent(id,list)

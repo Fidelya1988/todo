@@ -28,7 +28,7 @@ export default function Content() {
 
   },[dispatch, addListItem, setShowInput])
   return (
-    <mainContext.Provider value ={{handleDalete, saveNewItem, showInput, handleCreate}}>
+    <mainContext.Provider value ={{handleDalete, saveNewItem, showInput, handleCreate, setShowInput}}>
     <div>
       <List list={list}    />
     </div>

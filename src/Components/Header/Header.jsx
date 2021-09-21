@@ -8,10 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { Button } from "@material-ui/core";
 import CreateItemForm from "../Content/Form/Form";
+import CreateNewItemButton from "./CreateNewItemButton/CreateNewItemButton";
 export default function Header({ classes }) {
   const { handleDalete, saveNewItem, showInput, handleCreate } =
     useContext(mainContext);
-
 
   const { selected } = useSelector((state) => state.list);
 
@@ -31,12 +31,8 @@ export default function Header({ classes }) {
         <ListItemIcon>
           <Search />
         </ListItemIcon>
-        <ListItemIcon style={{ color: "White" }} onClick={handleCreate}>
-          {" "}
-          +
-        </ListItemIcon>
+        <CreateNewItemButton />
       </ListItem>
-      {showInput && <CreateItemForm handleSubmit={saveNewItem} />}
     </>
   );
 }
