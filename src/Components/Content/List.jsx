@@ -16,6 +16,7 @@ import { mainContext } from "./Content";
 import { useContext } from "react";
 import AddItemForm from "./Form/AddItemForm";
 import CompleteButtons from "./CompleteButtons/CompleteButtons";
+import Item from "./ListItem.jsx/ListItem";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,16 +46,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ToDoList({ list }) {
-  const dispatch = useDispatch();
+
   const classes = useStyles();
   const { matching } = useSelector((state) => state.search);
   const { currentId, showInput } = useContext(mainContext);
-  const handleChange = React.useCallback(
-    (id) => {
-      dispatch(setSelected(id));
-    },
-    [dispatch]
-  );
 
   return (
     <List className={classes.root}>
@@ -85,30 +80,8 @@ export default function ToDoList({ list }) {
               {currentId === value.id ? (
                 <ChangeItemForm id={value.id} />
               ) : (
-                <>
-                  <ListItemIcon>
-                    <Checkbox
-                      edge="start"
-                      tabIndex={-1}
-                      disableRipple
-                      inputProps={{ "aria-labelledby": labelId }}
-                      onChange={() => {
-                        handleChange(value.id);
-                      }}
-                    />
-                  </ListItemIcon>
-                  <EditItemButton id={value.id} />
-
-                  <CompleteButtons completed={value.completed} id={value.id} />
-
-                  <ListItemText
-                    id={labelId}
-                    primary={value.content}
-                    className={classes.content}
-                  />
-
-                  <ListItemIcon> {value.date} </ListItemIcon>
-                </>
+                <Item value= {value} labelId={labelId}/>
+              
               )}
             </ListItem>
           );

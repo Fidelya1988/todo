@@ -1,6 +1,8 @@
+import styles from './input.module.css'
+
 export default function Input({ handleChange, submit, value }) {
   return (
-    <textarea
+    <textarea className={styles.textarea}
       id="text"
       name="text"
       onChange={handleChange}
