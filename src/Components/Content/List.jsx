@@ -11,7 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 import EditItem from "./EditItem/EditItem";
 import { filterElementsArray } from "../../helpers/filterElements";
 import Header from "../Header/Header";
-import Input from "./Form/Input/Input";
+
+import { mainContext } from "./Content";
+import { useContext } from "react";
+import AddItemForm from "./Form/AddItemForm";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "70%",
@@ -37,7 +40,7 @@ export default function ToDoList({ list }) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const { matching } = useSelector((state) => state.search);
-
+  const { showInput } = useContext(mainContext);
   const handleChange = React.useCallback(
     (id) => {
       dispatch(setSelected(id));
@@ -48,23 +51,17 @@ export default function ToDoList({ list }) {
   return (
     <List className={classes.root}>
       <Header classes={classes} />
-      <ListItem
-            key='0'
-            role={undefined}
-            dense
-            button
-            className={classes.item}
-          >
-          <textarea
-        id="text"
-        name="text"
-        // onChange={handleChange}
-        // onBlur={submit}
-        autoFocus
-        handleSubmit
-        // value = {value}
-      ></textarea>
-</ListItem>
+      {showInput && (
+        <ListItem
+          key="0"
+          role={undefined}
+          dense
+          button
+          className={classes.item}
+        >
+          <AddItemForm />
+        </ListItem>
+      )}
       {filterElementsArray(list, matching).map((value) => {
         const labelId = `checkbox-list-label-${value.id}`;
 
@@ -98,7 +95,7 @@ export default function ToDoList({ list }) {
             />
           </ListItem>
         );
-      })}
+      }).reverse()}
     </List>
   );
 }

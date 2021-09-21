@@ -13,20 +13,26 @@ const getUniqueId = ()=> {
 export default function Content() {
 
   const {list} = useSelector(state=> state.list)
+  
   const [ showInput, setShowInput] = useState(false)
+  
   const dispatch = useDispatch()
+  
   const handleCreate = useCallback(()=> {
     setShowInput(true)
   },[setShowInput])
+  
   const handleDalete = useCallback(()=> {
      
     dispatch(deleteListItem())
   },[dispatch, deleteListItem])
+  
   const saveNewItem = useCallback((text)=> {
     dispatch(addListItem({id: getUniqueId(),content:text, date: utc }))
     setShowInput(false)
 
   },[dispatch, addListItem, setShowInput])
+  
   return (
     <mainContext.Provider value ={{handleDalete, saveNewItem, showInput, handleCreate, setShowInput}}>
     <div>
