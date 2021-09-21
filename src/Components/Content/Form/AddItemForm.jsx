@@ -11,7 +11,7 @@ import { Button } from "@material-ui/core";
 
 export default function AddItemForm() {
   const dispatch = useDispatch();
-  const { setShowInput
+  const { setShowInput, list
 } = useContext(mainContext);
   const hanldeClose = useCallback(() => {
     setShowInput(false);
@@ -23,7 +23,7 @@ export default function AddItemForm() {
     },
     onSubmit: (values) => {
       dispatch(
-        addListItem({ id: getUniqueId(), content: values.text, date: utc })
+        addListItem({ id: getUniqueId(list), content: values.text, date: utc })
       );
       setShowInput(false);
     

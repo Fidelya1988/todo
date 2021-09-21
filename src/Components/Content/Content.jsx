@@ -19,7 +19,7 @@ export default function Content() {
 
   
   return (
-    <mainContext.Provider value ={{ showInput, setShowInput, currentId, setCurrentId}}>
+    <mainContext.Provider value ={{ showInput, setShowInput, currentId, setCurrentId, list}}>
     <div>
       <List list={list}    />
     </div>
